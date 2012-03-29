@@ -70,7 +70,7 @@ class JsonView extends View {
 						$result_array[utf8_encode($key)] = $this->utf8_encode_array($value);
 					} else {
 						// no recursion
-						if (is_string($value)) {
+						if (is_string($value)&&!mb_check_encoding($value, 'UTF-8')) {
 							$result_array[utf8_encode($key)] = utf8_encode($value);
 						} else {
 							// do not re-encode non-strings, just copy data
@@ -86,7 +86,7 @@ class JsonView extends View {
 					} else {
 						// no recursion
 
-						if (is_string($value)) {
+						if (is_string($value)&&!mb_check_encoding($value, 'UTF-8')) {
 							$result_array[$key] = utf8_encode($value);
 						} else {
 							// do not re-encode non-strings, just copy data
